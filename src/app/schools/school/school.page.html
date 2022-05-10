@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button >
+        </ion-back-button>
+    </ion-buttons>
+    <ion-title>Escola</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll" color="light">
+    <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ school.noEntidade }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+            <p class="region-label">Região: <span class="region">{{ school.noRegiao }}</span></p>
+            <p class="sub-info"><span class="name-city">{{ school.noMunicipio }}</span> - <span class="initials-uf">{{ school.sgUf}}</span></p>
+            <p class="zone-label">Zona: <span class="zone">{{ school.localizacao }}</span></p>
+            <p class="inep-label">Cód Inep: <span class="inep-cod">{{ school.coEntidade }}</span></p>
+
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>

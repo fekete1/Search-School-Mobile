@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-searchbar  (ionChange)="getSchoolsSearch($event)" placeholder="Pesquise a escola" showCancelButton="focus" cancelButtonText="Cancel"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+    <ion-list *ngIf="listSchoolsFiltered">
+        <ion-item *ngIf="listSchoolsFiltered.length === 0">
+            <ion-label class="Ion-text-center">
+                Escola não encontrada...
+            </ion-label>
+        </ion-item>
+
+        <ion-item-sliding *ngFor="let school of listSchoolsFiltered">
+            <ion-item lines="full" (click)="presentSchool(school)">
+                <ion-label class="ion-text-wrap">
+                    <div>
+                        <h1 class="school-name">{{ school.noEntidade }}</h1>
+                        <p class="sub-info"><span class="name-city">{{ school.noMunicipio }}</span> - <span class="initials-uf">{{ school.sgUf}}</span></p>
+                        <p class="inep-label">Cód Inep: <span class="inep-cod">{{ school.coEntidade }}</span></p>
+                    </div>
+                </ion-label>
+            </ion-item>
+            <ion-item-options side="end" >
+                <ion-item-option [color]="listSchoolsFavorite.includes(school)? 'danger' : 'success' " (click)="presentConfirmFav(school)" >
+                    <ion-icon name="star"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+</ion-content>
