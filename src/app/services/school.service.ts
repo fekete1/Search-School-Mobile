@@ -1,7 +1,7 @@
 import { ISchoolApi } from './../models/ISchoolApi.models';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { map, catchError } from 'rxjs/operators';
 
@@ -20,18 +20,14 @@ export class SchoolService {
         const url = `${this.apiUrl}/escolas`;
         return this.http.get<ISchoolApi[]>(url)
         .pipe(
-            map(response =>  response)
+            map((response) => response),
+            catchError((error) => this.presentError(error))
             );
-
-        // return data.pipe(
-        //     map((response) => response),
-        //     catchError((error) => this.presentError(error))
-        // );
     }
 
     async presentError(error) {
         const toast = await this.toastController.create({
-            message: 'Não foi encontrado essa escola',
+            message: 'Não foi possível carregar as escolas, Erro: '+error,
             duration: 2000,
             color: 'danger',
             position: 'middle',
